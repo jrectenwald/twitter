@@ -1,0 +1,8 @@
+<h1>Welcome to Fwitter!</h1>
+
+<h2>Tweets!</h2>
+<% @tweets.each do |tweet| %>
+  <p><strong><%= tweet.user %>:</strong> <%= tweet.status %></p>
+<% end %>
+
+<h2>Add a tweet</h2>
