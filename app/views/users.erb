@@ -1,0 +1,10 @@
+<h2>Users!</h2>
+<% @users.each do |user| %>
+  <p><%= user.name %></p>
+<% end %>
+
+<h3>Add a user</h3>
+<form action="/users" method="POST">
+  <p>Name: <input type="text" name="username"></p>
+  <input class="btn btn-primary" type="submit">
+</form>

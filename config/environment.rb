@@ -4,10 +4,12 @@ require 'bundler'
 Bundler.require
 
 require './app/models/tweet'
+require './app/models/user'
 
 configure do
   set :public_folder, 'public'
   set :views, 'app/views'
+  enable :sessions
 end
 
 configure :development do

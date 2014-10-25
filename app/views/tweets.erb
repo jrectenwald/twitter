@@ -1,13 +1,29 @@
-<h1>Welcome to Fwitter!</h1>
-
 <h2>Tweets!</h2>
 <% @tweets.each do |tweet| %>
   <p><strong><%= tweet.user %>:</strong> <%= tweet.status %></p>
 <% end %>
 
-<h2>Add a tweet</h2>
+<h3>Add a tweet</h3>
 <form action="/tweets" method="POST">
-  <p>User: <input type="text" name="user"></p>
+  <p>User: 
+    <select name="user">
+    <% @users.each do |user| %>
+      <option value="<%= user.id %>"><%= user.name %></option>
+    <% end %>
+    </select>
+  </p>
   <p>Status: <input type="text" name="status"></p>
+  <input class="btn btn-primary" type="submit">
+</form>
+
+<h3>Sign In</h3>
+<form action="/sign-in" method="POST">
+  <p>User: 
+    <select name="user">
+    <% @users.each do |user| %>
+      <option value="<%= user.id %>"><%= user.name %></option>
+    <% end %>
+    </select>
+  </p>
   <input class="btn btn-primary" type="submit">
 </form>
