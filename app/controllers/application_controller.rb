@@ -4,11 +4,11 @@ class ApplicationController < Sinatra::Application
 
   helpers do
     def signed_in?
-      !session[:id].nil?
+      session[:id]
     end
 
     def current_user
-      current_user = User.find_by(id: session[:id])
+      current_user = User.find(session[:id])
     end
   end
 
@@ -21,7 +21,6 @@ class ApplicationController < Sinatra::Application
   end
 
   post '/tweets' do
-    binding.pry
     # Tweet.new(params[:user], params[:status])
     Tweet.create(:user_id => params[:user], :status => params[:status])
     redirect '/tweets'
@@ -38,6 +37,12 @@ class ApplicationController < Sinatra::Application
   end
 
   post '/sign-in' do
-    session[:id] = params[:user_id]
+    session[:id] = params[:user]
+    redirect '/tweets'
+  end
+
+  get '/sign-out' do
+    session[:id] = nil
+    redirect '/tweets'
   end
 end
