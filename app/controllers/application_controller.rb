@@ -8,7 +8,7 @@ class ApplicationController < Sinatra::Application
     end
 
     def current_user
-      current_user = User.find(session[:id])
+      current_user = User.find_by(session[:id])
     end
   end
 
@@ -47,14 +47,20 @@ class ApplicationController < Sinatra::Application
   end
 
   post '/sign-in' do
-    session[:id] = params[:user]
-    redirect '/tweets'
+    @user = User.find_by(email: params[:email])
+    if BCrypt::Password.new(@user.password) == params[:password]
+      session[:id] = @user.id
+      redirect "/users/#{@user.id}"
+    else
+      @error = "Please try again."
+    end
   end
 
   post '/sign-up' do
     password_hash = BCrypt::Password.create(params[:password])
-    @user = User.new()
+    @user = User.new(name: params[:username], email: params[:email], password: password_hash)
     @user.save
+    session[:id] = @user.id
     redirect "/users/#{@user.id}"
   end
 

@@ -6,7 +6,7 @@
 <% if signed_in? && current_user.id == @user.id %>
   <h3>Add a tweet</h3>
   <form action="/tweets" method="POST">
-    <p><input type="textarea" name="status"></p>
+    <p><textarea rows="4" cols="50" name="status"></textarea></p>
     <input type="hidden" name="user_id" value="<%= @user.id %>">
     <input class="btn btn-primary" type="submit">
   </form>

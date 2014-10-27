@@ -9,7 +9,7 @@
 
       <% if signed_in? %>
         <p><%= current_user.name %> | <a href="/sign-out">Sign Out</a></p>
-      <% elsif @users || @user %>
+      <% else %>
         <a href="/sign-in">Sign In</a>
       <% end %>
 
