@@ -36,6 +36,12 @@ class ApplicationController < Sinatra::Application
     redirect '/users'
   end
 
+  get '/users/:id' do
+    @user = User.find(params[:id])
+    @tweets = @user.tweets
+    erb :user
+  end
+
   get '/sign-in' do
     erb :signin
   end
