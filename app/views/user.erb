@@ -3,7 +3,7 @@
   <p><%= tweet.status %></p>
 <% end %>
 
-<% if current_user.id == @user.id %>
+<% if signed_in? && current_user.id == @user.id %>
   <h3>Add a tweet</h3>
   <form action="/tweets" method="POST">
     <p><input type="textarea" name="status"></p>
