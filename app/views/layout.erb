@@ -10,14 +10,7 @@
       <% if signed_in? %>
         <p><%= current_user.name %> | <a href="/sign-out">Sign Out</a></p>
       <% else %>
-        <p><form action="/sign-in" method="POST">
-          <select name="user">
-          <% @users.each do |user| %>
-            <option value="<%= user.id %>"><%= user.name %></option>
-          <% end %>
-          </select>
-          <input class="btn btn-primary btn-sm" type="submit" value="Sign In">
-        </form></p>
+        <a href="/sign-in">Sign In</a>
       <% end %>
 
       <%= yield %>

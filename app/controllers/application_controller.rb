@@ -36,8 +36,19 @@ class ApplicationController < Sinatra::Application
     redirect '/users'
   end
 
+  get '/sign-in' do
+    erb :signin
+  end
+
   post '/sign-in' do
     session[:id] = params[:user]
+    redirect '/tweets'
+  end
+
+  post '/sign-up' do
+    password_salt = BCrypt::Engine.generate_salt
+    password_hash = BCrypt::Engine.hash_secret(params[:password], password_salt)
+    @user
     redirect '/tweets'
   end
 
