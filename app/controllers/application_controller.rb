@@ -10,6 +10,10 @@ class ApplicationController < Sinatra::Application
     def current_user
       current_user = User.find_by(password: session[:id])
     end
+
+    def error
+      session[:error]
+    end
   end
 
   get '/tweets' do
@@ -50,9 +54,10 @@ class ApplicationController < Sinatra::Application
     @user = User.find_by(email: params[:email])
     if BCrypt::Password.new(@user.password) == params[:password]
       session[:id] = BCrypt::Password.new(@user.password)
+      session[:error] = nil
       redirect "/users/#{@user.id}"
     else
-      @error = "Please try again."
+      session[:error] = "Wrong email or password. Please try again."
       redirect "/sign-in"
     end
   end
@@ -60,9 +65,14 @@ class ApplicationController < Sinatra::Application
   post '/sign-up' do
     password_hash = BCrypt::Password.create(params[:password])
     @user = User.new(name: params[:username], email: params[:email], password: password_hash)
-    @user.save
-    session[:id] = password_hash
-    redirect "/users/#{@user.id}"
+    if @user.save
+      session[:id] = password_hash
+      session[:error] = nil
+      redirect "/users/#{@user.id}"
+    else
+      session[:error] = "You've already signed up with that email address."
+      redirect "/sign-in"
+    end
   end
 
   get '/sign-out' do
