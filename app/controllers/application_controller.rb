@@ -43,7 +43,17 @@ class ApplicationController < Sinatra::Application
   get '/users/:id' do
     @user = User.find(params[:id])
     @tweets = @user.tweets
+    @followers = @user.followers
+    @following = @user.following
     erb :user
+  end
+
+  post '/users/follow' do 
+    @user_to_follow = User.find(params[:follow_id])
+    @following = Following.create(user_id: params[:user_id], following_id: params[:follow_id])
+    @follower = Follower.create(user_id: params[:follow_id], follower_id: params[:user_id])
+    
+    redirect "/users/#{@user_to_follow.id}"
   end
 
   get '/sign-in' do

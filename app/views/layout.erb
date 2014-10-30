@@ -9,14 +9,16 @@
       <h1>Welcome to Fwitter!</h1>
 
       <% if signed_in? %>
-        <p><%= current_user.name %> | <a href="/sign-out">Sign Out</a></p>
+        <p><a href="/users/<%= current_user.id %>"><%= current_user.name %></a> | <a href="/sign-out">Sign Out</a></p>
       <% else %>
         <a href="/sign-in">Sign In</a>
       <% end %>
 
       <%= yield %>
 
-      <h3><a href="/tweets">Tweets</a> | <a href="/users">Users</a></h3>
+      <div class="footer">
+        <h4><a href="/tweets">Tweets</a> | <a href="/users">Users</a></h4>
+      </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
