@@ -1,4 +1,4 @@
-class CreateFollowing < ActiveRecord::Migration
+class CreateFollowingsTable < ActiveRecord::Migration
   def up
     create_table :followings do |t|
       t.integer :user_id
@@ -7,6 +7,6 @@ class CreateFollowing < ActiveRecord::Migration
   end
 
   def down
-    drop_table :following
+    drop_table :followings
   end
 end

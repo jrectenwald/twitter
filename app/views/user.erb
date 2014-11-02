@@ -1,11 +1,16 @@
 <h2><%= @user.name %>
-<% if signed_in? && current_user.id != @user.id %>
+<% if current_user.id != @user.id && !current_user.followed_users.include?(@user) %>
   <form action="/users/follow" method="POST" id="follow-btn">
-    <input type="hidden" name="user_id" value="<%= current_user.id %>">
-    <input type="hidden" name="follow_id" value="<%= @user.id %>">
+    <input type="hidden" name="follower_id" value="<%= current_user.id %>">
+    <input type="hidden" name="following_id" value="<%= @user.id %>">
     <input class="btn btn-primary btn-sm" type="submit" value="Follow">
   </form>
 <% end %></h2>
+
+<h3>Tweets</h3>
+<% @tweets.each do |tweet| %>
+  <p><%= tweet.status %></p>
+<% end %>
 
 <% if signed_in? && current_user.id == @user.id %>
   <h3>Add a tweet</h3>
@@ -14,19 +19,14 @@
     <input type="hidden" name="user_id" value="<%= @user.id %>">
     <input class="btn btn-primary" type="submit">
   </form>
+<% end %>
 
-  <h3>Following</h3>
-  <% @following.each do |user| %>
-    <p><a href="/users/<%= user.id %>"><%= user.name %></a></p>
-  <% end %>
+<h3>Following</h3>
+<% @followings.each do |following| %>
+  <p><a href="/users/<%= following.id %>"><%= following.name %></a></p>
+<% end %>
 
-  <h3>Follower</h3>
-  <% @followers.each do |user| %>
-    <p><a href="/users/<%= user.id %>"><%= user.name %></a></p>
-  <% end %>
-
-<% else %>
-  <% @tweets.each do |tweet| %>
-    <p><%= tweet.status %></p>
-  <% end %>
+<h3>Followers</h3>
+<% @followers.each do |follower| %>
+  <p><a href="/users/<%= follower.id %>"><%= follower.name %></a></p>
 <% end %>
