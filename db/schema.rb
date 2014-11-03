@@ -10,17 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141102221400) do
-
-  create_table "followers", force: true do |t|
-    t.integer "user_id"
-    t.integer "follower_id"
-  end
-
-  create_table "followings", force: true do |t|
-    t.integer "user_id"
-    t.integer "following_id"
-  end
+ActiveRecord::Schema.define(version: 20141023192917) do
 
   create_table "tweets", force: true do |t|
     t.string  "status"
@@ -29,8 +19,6 @@ ActiveRecord::Schema.define(version: 20141102221400) do
 
   create_table "users", force: true do |t|
     t.string "name"
-    t.string "email"
-    t.string "password"
   end
 
 end

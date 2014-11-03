@@ -10,22 +10,15 @@ class ApplicationController < Sinatra::Application
     def current_user
       current_user = User.find_by(password: session[:id])
     end
-
-    def error
-      session[:error]
-    end
   end
 
   get '/tweets' do
-    # Tweet.new("Vanessa", "My first tweet!!! SO EXCITING OMG!!!")
-    # Tweet.new("Vanessa", "My second tweet!!! Still super exciting!!!")
     @tweets = Tweet.all
     @users = User.all
     erb :tweets
   end
 
   post '/tweets' do
-    # Tweet.new(params[:user], params[:status])
     Tweet.create(:user_id => params[:user_id], :status => params[:status])
     redirect '/tweets'
   end
@@ -38,22 +31,6 @@ class ApplicationController < Sinatra::Application
   post '/users' do
     User.create(:name => params[:username])
     redirect '/users'
-  end
-
-  get '/users/:id' do
-    @user = User.find(params[:id])
-    @tweets = @user.tweets
-    @followers = @user.follows
-    @followings = @user.followed_users
-    erb :user
-  end
-
-  post '/users/follow' do 
-    @following = User.find(params[:following_id])
-    Follower.create(user_id: params[:following_id], follower_id: params[:follower_id])
-    Following.create(user_id: params[:follower_id], following_id: params[:following_id])
-    
-    redirect "/users/#{@following.id}"
   end
 
   get '/sign-in' do
