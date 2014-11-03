@@ -9,7 +9,7 @@
       <h1>Welcome to Fwitter!</h1>
 
       <% if signed_in? %>
-        <p><a href="/users/<%= current_user.id %>"><%= current_user.name %></a> | <a href="/sign-out">Sign Out</a></p>
+        <p><%= current_user.name %> | <a href="/sign-out">Sign Out</a></p>
       <% else %>
         <a href="/sign-in">Sign In</a>
       <% end %>
