@@ -1,6 +1,18 @@
 <h2>Tweets!</h2>
 <% @tweets.each do |tweet| %>
   <p><strong><%= tweet.user.name %>:</strong> <%= tweet.status %></p>
-<% end %>
+<% end %>>
 
+<h3>Add a tweet</h3>
+<form action="/tweets" method="POST">
+  <p>User: 
+    <select name="user">
+    <% @users.each do |user| %>
+      <option value="<%= user.id %>"><%= user.name %></option>
+    <% end %>
+    </select>
+  </p>
+  <p>Status: <input type="text" name="status"></p>
+  <input class="btn btn-primary" type="submit">
+</form
 
