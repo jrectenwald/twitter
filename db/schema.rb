@@ -10,16 +10,6 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141023192917) do
-
-  create_table "tweets", force: true do |t|
-    t.string  "status"
-    t.integer "user_id"
-  end
-
-  create_table "users", force: true do |t|
-    t.string "name"
-    t.string "email"
-  end
+ActiveRecord::Schema.define(version: 0) do
 
 end

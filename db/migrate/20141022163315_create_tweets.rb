@@ -1,7 +1,7 @@
 class CreateTweets < ActiveRecord::Migration
   def up
     create_table :tweets do |t|
-      t.string :user_name
+      t.string :user
       t.string :status
     end
   end
