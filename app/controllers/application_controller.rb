@@ -2,6 +2,15 @@ require_relative "../../config/environment"
 
 class ApplicationController < Sinatra::Application
 
+  configure do
+    set :public_folder, 'public'
+    set :views, 'app/views'
+  end
+
+  configure :development do
+    set :database, "sqlite3:///db/database.db"
+  end
+
   get '/tweets' do
     @tweets = Tweet.all
     @users = User.all
