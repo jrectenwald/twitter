@@ -25,7 +25,6 @@ class ApplicationController < Sinatra::Base
 
   post '/sign-up' do
     @user = User.create(name: params[:name], email: params[:email])
-    session[:id] = @user.id
     redirect "/users"
   end
 end
