@@ -14,7 +14,8 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/tweets' do
-    Tweet.create(:user_id => params[:user_id], :status => params[:status])
+    tweet = Tweet.new(:user_id => params[:user_id], :status => params[:status])
+    tweet.save
     redirect '/tweets'
   end
 
@@ -24,7 +25,7 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/users' do
-    @user = User.create(name: params[:name], email: params[:email])
+    @user = User.create(:name => params[:name], :email => params[:email])
     redirect '/users'
   end
 end
