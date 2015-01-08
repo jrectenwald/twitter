@@ -1,4 +1,4 @@
-require_relative "../../config/environment.rb"
+require './config/environment'
 
 class Tweet < ActiveRecord::Base
   belongs_to :user

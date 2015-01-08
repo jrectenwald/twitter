@@ -1,4 +1,4 @@
-require_relative "../../config/environment.rb"
+require './config/environment'
 
 class User < ActiveRecord::Base
   has_many  :tweets
