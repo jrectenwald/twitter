@@ -1,4 +1,4 @@
-class ModifyTweetsTable < ActiveRecord::Migration
+class ModifyTweets < ActiveRecord::Migration
   def up
     remove_column :tweets, :user, :string
     add_column :tweets, :user_id, :integer
