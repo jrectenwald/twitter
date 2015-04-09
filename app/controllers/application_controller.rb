@@ -7,16 +7,27 @@ class ApplicationController < Sinatra::Base
     set :views, 'app/views'
   end
 
-  get '/tweets' do
+  get '/' do
     @tweets = Tweet.all
     @users = User.all
-    erb :tweets
+    erb :index
   end
 
-  post '/tweets' do
+  get '/' do
+    @tweets = Tweet.all
+    @users = User.all
+    erb :tweet
+  end
+
+  get '/tweet' do
+    @users = User.all
+    erb :tweet
+  end
+
+  post '/tweet' do
     tweet = Tweet.new(:user_id => params[:user_id], :status => params[:status])
     tweet.save
-    redirect '/tweets'
+    redirect '/'
   end
 
   get '/users' do
@@ -27,6 +38,6 @@ class ApplicationController < Sinatra::Base
   post '/sign-up' do
     @user = User.new(:name => params[:name], :email => params[:email])
     @user.save
-    redirect '/tweets'
+    redirect '/'
   end
 end
