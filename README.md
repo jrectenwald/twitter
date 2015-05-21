@@ -1,3 +1,13 @@
-#App Launchers Sinatra Template
+# Fwitter Project!
 
-This repository holds an example Sinatra app (Twitter) that students will build together in the first 5-6 weeks of class. There is a branch for each week demonstrating what the app should look like at the end of class that week. 
+This repository holds branches for every iteration of the Fwitter Project
+
+- [Day 1- MVC]()
+
+- [Day 2 - Forms]()
+
+- [Day 3 - Databases]()
+
+- [Day 4 - ActiveRecord Associations]()
+
+- [Day 5 - Session and Authorization]()
