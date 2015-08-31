@@ -1,6 +1,11 @@
 <h2>Tweets!</h2>
 
 <% @tweets.each do |tweet| %>
+	<!-- Our tweets no longer respond to a method called username. Instead, they now respond to a method called 'user'. 
+	The return value of tweet.user will the be user object associated with that tweet.
+	That user object will respond to a method called "name". 
+	Therefore, we can ask a tweet what it's user's name is by calling tweet.user.name -->
+
   <p><strong><%= tweet.user.name %>:</strong> <%= tweet.status %></p>
 <% end %>
 
