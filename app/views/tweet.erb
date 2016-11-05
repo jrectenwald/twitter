@@ -1,14 +1,11 @@
 <!-- We've updated our form to have a drop-down menu of all of the available users. 
  -->
 <h2>Add a tweet</h2>
-<form action="/tweet" method="POST">
-  <p>User:
-    <select name="user_id"> <!-- We've added a select box with a name of user_id (remember, this will be a key in the params hash) -->
-    <% @users.each do |user| %> <!-- Iterate through each user -->
-      <option value="<%= user.id %>"><%= user.name %></option> <!-- And add them as an option in the drop-down. We'll display their user name, but the value will be their id. --> 
-    <% end %>
-    </select>
-  </p>
-  <p>Status: <input type="text" name="status"></p>
+<% if session[:user_id] %>
+  <h2>Add a tweet</h2>
+  <form action="/tweet" method="POST">
+  <p><strong>User:</strong> <%= @user.name %> <input type="hidden" name="user_id" value="<%= @user.id %>"></p>
+  <p><strong>Status:</strong> <input type="text" name="status"></p>
   <input class="btn btn-primary" type="submit">
-</form>
+  </form>
+<% end %>

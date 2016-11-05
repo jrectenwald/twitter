@@ -5,6 +5,16 @@
   <p><%= user.name %></p>
 <% end %>
 
+
+<h3>Sign In</h3>
+<form action="/sign-in" method="POST">
+  <p>Name: <input type="text" name="name"></p>
+  <p>Email: <input type="text" name="email"></p>
+  <input class="btn btn-primary" type="submit">
+</form>
+</br>
+  
+  
 <!-- It also inclues a form to sign-up with a method of "post" and an action of "/sign-up" -->
 <h3>Sign Up</h3>
 <form action="/sign-up" method="POST">

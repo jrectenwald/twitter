@@ -18,6 +18,9 @@ Within this file, we use the yield command - this will render whatever file we s
       <! Once everything in index has been rendered, Sinatra will render everything else on the layout page. -->
       <div class="footer">
         <h4><a href="/tweet">Tweet</a> | <a href="/users">Users</a></h4>
+        <% if signed_in? %>
+          <h5>Current User: <%= current_user.name %> | <a href="/sign-out">Sign Out</a></h5>
+        <% end %>
       </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>

@@ -5,6 +5,18 @@ class ApplicationController < Sinatra::Base
   configure do
     set :public_folder, 'public'
     set :views, 'app/views'
+    enable :sessions
+    set :session_secret, 'bubbles'
+  end
+  
+  helpers do
+    def signed_in?
+      session[:user_id]
+    end
+
+    def current_user
+      current_user = User.find(session[:user_id])
+    end
   end
 
   get '/' do
@@ -16,7 +28,7 @@ class ApplicationController < Sinatra::Base
 
   get '/tweet' do
     # again, we load up all of our users before we render the new tweet form. 
-    @users = User.all
+    @user = current_user if session[:user_id]
     erb :tweet
   end
 
@@ -36,6 +48,20 @@ class ApplicationController < Sinatra::Base
     # Here, we can create a new user, the same way we create new tweets. 
     @user = User.new(:name => params[:name], :email => params[:email])
     @user.save
+    redirect '/'
+  end
+  
+  post '/sign-in' do
+    @user = User.find_by(:email => params[:email], :name => params[:name])
+    if @user
+      session[:user_id] = @user.id
+    end
+    redirect '/tweet'
+  end
+  
+  get '/sign-out' do
+    session[:user_id] = nil
+    session[:error] = nil
     redirect '/'
   end
 end
